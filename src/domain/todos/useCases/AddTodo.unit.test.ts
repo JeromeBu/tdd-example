@@ -20,6 +20,21 @@ describe("Add Todo", () => {
     });
   });
 
+  describe("Todo with same uuid already exists", () => {
+    it("refuses to add the Todo with an explicit warning", async () => {
+      todoRepository.setTodos([
+        { uuid: "alreadyExistingUuid", description: "Some description" },
+      ]);
+      await expectPromiseToFailWith(
+        addTodo.execute({
+          uuid: "alreadyExistingUuid",
+          description: "My description",
+        }),
+        "A Todo with the same uuid already exists"
+      );
+    });
+  });
+
   describe("Description is fine", () => {
     it("saves the todo", async () => {
       const uuid = generateUuid();
