@@ -1,0 +1,15 @@
+import { Response } from "express";
+
+export const sendHttpResponse = async (
+  res: Response,
+  callback: () => Promise<unknown>
+) => {
+  try {
+    const response = await callback();
+    res.status(201);
+    return res.json(response);
+  } catch (error) {
+    res.status(400);
+    return res.json({ errors: error.errors || [error.message] });
+  }
+};
