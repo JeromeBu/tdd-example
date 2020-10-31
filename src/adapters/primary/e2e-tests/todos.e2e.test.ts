@@ -25,13 +25,22 @@ describe("Add Todo route", () => {
   });
 
   describe("When all is good", () => {
-    it("adds a todo", async () => {
-      const response = await request.post("/todos").send({
+    it("adds a todo, then gets all the todos", async () => {
+      const addTodoResponse = await request.post("/todos").send({
         uuid: "correctTodoUuid",
         description: "Description long enough",
       });
-      expect(response.status).toBe(201);
-      expect(response.body).toBe("");
+      expect(addTodoResponse.body).toBe("");
+      expect(addTodoResponse.status).toBe(200);
+
+      const listTodoResponse = await request.get("/todos");
+      expect(listTodoResponse.body).toEqual([
+        {
+          uuid: "correctTodoUuid",
+          description: "Description long enough",
+        },
+      ]);
+      expect(listTodoResponse.status).toBe(200);
     });
   });
 });

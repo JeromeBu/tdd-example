@@ -16,15 +16,20 @@ router.route("/").get((req, res) => {
 
 const useCases = getUsecases();
 
-router.route("/todos").post(async (req, res) =>
-  sendHttpResponse(res, () =>
-    callUseCase({
-      useCase: useCases.addTodo,
-      validationSchema: addTodoParamsSchema,
-      useCaseParams: req.body,
-    })
+router
+  .route("/todos")
+  .post(async (req, res) =>
+    sendHttpResponse(res, () =>
+      callUseCase({
+        useCase: useCases.addTodo,
+        validationSchema: addTodoParamsSchema,
+        useCaseParams: req.body,
+      })
+    )
   )
-);
+  .get(async (req, res) =>
+    sendHttpResponse(res, () => useCases.listTodos.execute())
+  );
 
 app.use(router);
 

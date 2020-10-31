@@ -9,11 +9,15 @@ export class InMemoryTodoRepository implements TodoRepository {
     return todoEntity;
   }
 
+  public async getAllTodos() {
+    return this._todos;
+  }
+
   get todos() {
     return this._todos;
   }
 
-  // setTodos(todoEntites: TodoEntity[]) {
-  //   this._todos = todoEntites;
-  // }
+  setTodos(todoEntites: TodoEntity[]) {
+    this._todos = todoEntites;
+  }
 }

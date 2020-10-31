@@ -6,7 +6,7 @@ export const sendHttpResponse = async (
 ) => {
   try {
     const response = await callback();
-    res.status(201);
+    res.status(200);
     return res.json(response);
   } catch (error) {
     res.status(400);
