@@ -9,6 +9,6 @@ export const getUsecases = () => {
   const repositories = getRepositories();
 
   return {
-    addTodo: new AddTodo({ uuidGenerator: repositories.todo }),
+    addTodo: new AddTodo(),
   };
 };

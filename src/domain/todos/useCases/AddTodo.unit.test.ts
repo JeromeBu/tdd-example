@@ -4,7 +4,9 @@ import { AddTodo } from "./AddTodo";
 // Add Todo :
 // - you cannot add a Todo with a text of less than 3 caracters long
 // - you can save a Todo
+// - trailing white spaces should be removed, and text should be capitalize
 // - you cannot add 2 Todos with the same uuid
+
 // - bonus : you can add Todos only between 10h and 18h
 
 describe("Add Todo", () => {

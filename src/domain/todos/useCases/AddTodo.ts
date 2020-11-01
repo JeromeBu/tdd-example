@@ -1,4 +1,4 @@
-type AddTodoParams = {};
+type AddTodoParams = unknown;
 
 // Object :
 export class AddTodo {
