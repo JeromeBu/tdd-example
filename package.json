@@ -2,13 +2,12 @@
   "name": "tdd-exemple",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
-    "start": "ts-node server.ts",
+    "start": "REPOSITORIES=JSON ts-node src/adapters/primary/startServer.ts",
     "test:unit": "jest --watchAll --testRegex=.unit.test.ts",
-    "test:e2e": "jest --runInBand --watchAll --testRegex=.e2e.test.ts",
+    "test:e2e": "REPOSITORIES=JSON jest --runInBand --watchAll --testRegex=.e2e.test.ts",
     "test:integration": "jest --runInBand --testRegex=.integration.test.ts --watchAll",
-    "test:all": "jest --runInBand",
+    "test:all": "REPOSITORIES=JSON jest --runInBand",
     "lint": "eslint '*/**/*.{js,ts,tsx}' --fix"
   },
   "keywords": [],

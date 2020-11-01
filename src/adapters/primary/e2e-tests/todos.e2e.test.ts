@@ -1,9 +1,17 @@
 import supertest from "supertest";
 import { app } from "../server";
+import * as fs from "fs";
 
 const request = supertest(app);
 
-describe("Add Todo route", () => {
+const emptyAppDataFile = () =>
+  fs.writeFileSync(`${__dirname}/../../secondary/app-data.json`, "[]");
+
+describe("Todos routes", () => {
+  beforeAll(() => {
+    emptyAppDataFile();
+  });
+
   describe("When body is not valid", () => {
     it("fails when fields in the body are missing", async () => {
       const response = await request.post("/todos");
@@ -30,7 +38,7 @@ describe("Add Todo route", () => {
         uuid: "correctTodoUuid",
         description: "Description long enough",
       });
-      expect(addTodoResponse.body).toBe("");
+      expect(addTodoResponse.body).toEqual({ success: true });
       expect(addTodoResponse.status).toBe(200);
 
       const listTodoResponse = await request.get("/todos");
