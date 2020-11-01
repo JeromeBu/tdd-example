@@ -1,6 +1,7 @@
 import { AddTodo } from "./AddTodo";
 import { v4 as generateUuid } from "uuid";
 import { InMemoryTodoRepository } from "../../../adapters/secondary/InMemoryTodoRepository";
+import { expectPromiseToFailWith } from "../../../utils/test.helpers";
 
 describe("Add Todo", () => {
   let addTodo: AddTodo;
@@ -43,11 +44,4 @@ describe("Add Todo", () => {
       expect(todoRepository.todos).toEqual([{ uuid, description }]);
     });
   });
-
-  const expectPromiseToFailWith = async (
-    promise: Promise<unknown>,
-    errorMessage: string
-  ) => {
-    await expect(promise).rejects.toThrowError(new Error(errorMessage));
-  };
 });

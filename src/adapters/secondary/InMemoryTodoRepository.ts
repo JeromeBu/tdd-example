@@ -12,7 +12,6 @@ export class InMemoryTodoRepository implements TodoRepository {
       throw new Error("A Todo with the same uuid already exists");
     }
     this._todos.push(todoEntity);
-    return todoEntity;
   }
 
   public async getAllTodos() {
