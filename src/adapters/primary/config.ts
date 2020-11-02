@@ -1,3 +1,4 @@
+import { Clock, CustomClock, RealClock } from "../../domain/todos/ports/Clock";
 import { AddTodo } from "../../domain/todos/useCases/AddTodo";
 import { ListTodos } from "../../domain/todos/useCases/ListTodos";
 import { InMemoryTodoRepository } from "../secondary/InMemoryTodoRepository";
@@ -14,11 +15,25 @@ export const getRepositories = () => {
   };
 };
 
+const getClock = (): Clock => {
+  console.log("NODE_ENV : ", process.env.NODE_ENV);
+
+  if (process.env.NODE_ENV === "test") {
+    const clock = new CustomClock();
+    clock.setNextDate(new Date("2020-11-02T12:00"));
+    return clock;
+  }
+  return new RealClock();
+};
+
 export const getUsecases = () => {
   const repositories = getRepositories();
 
   return {
-    addTodo: new AddTodo(repositories.todo),
+    addTodo: new AddTodo({
+      todoRepository: repositories.todo,
+      clock: getClock(),
+    }),
     listTodos: new ListTodos(repositories.todo),
   };
 };

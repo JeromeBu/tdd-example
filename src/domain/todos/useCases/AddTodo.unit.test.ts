@@ -2,14 +2,18 @@ import { AddTodo } from "./AddTodo";
 import { v4 as generateUuid } from "uuid";
 import { InMemoryTodoRepository } from "../../../adapters/secondary/InMemoryTodoRepository";
 import { expectPromiseToFailWith } from "../../../utils/test.helpers";
+import { CustomClock } from "../ports/Clock";
 
 describe("Add Todo", () => {
   let addTodo: AddTodo;
   let todoRepository: InMemoryTodoRepository;
+  let clock: CustomClock;
 
   beforeEach(() => {
     todoRepository = new InMemoryTodoRepository();
-    addTodo = new AddTodo(todoRepository);
+    clock = new CustomClock();
+    addTodo = new AddTodo({ todoRepository, clock });
+    clock.setNextDate(new Date("2020-11-02T12:00"));
   });
 
   describe("Description has less than 3 charaters", () => {
@@ -53,6 +57,32 @@ describe("Add Todo", () => {
       expect(todoRepository.todos).toEqual([
         { uuid, description: "Should Be trimed" },
       ]);
+    });
+  });
+
+  describe("Depending on time", () => {
+    it("refuses to add Todo before 08h00", async () => {
+      clock.setNextDate(new Date("2020-11-02T07:59"));
+      const useCasePromise = addTodo.execute({
+        uuid: "someUuid",
+        description: "a description",
+      });
+      await expectPromiseToFailWith(
+        useCasePromise,
+        "You can only add todos between 08h00 and 18h00"
+      );
+    });
+
+    it("refuses to add Todo after 18h00", async () => {
+      clock.setNextDate(new Date("2020-11-02T18:00"));
+      const useCasePromise = addTodo.execute({
+        uuid: "someUuid",
+        description: "a description",
+      });
+      await expectPromiseToFailWith(
+        useCasePromise,
+        "You can only add todos between 08h00 and 18h00"
+      );
     });
   });
 });

@@ -4,10 +4,10 @@
   "description": "",
   "scripts": {
     "start": "REPOSITORIES=JSON ts-node src/adapters/primary/startServer.ts",
-    "test:unit": "jest --watchAll --testRegex=.unit.test.ts",
-    "test:e2e": "REPOSITORIES=JSON jest --runInBand --watchAll --testRegex=.e2e.test.ts",
-    "test:integration": "jest --runInBand --testRegex=.integration.test.ts --watchAll",
-    "test:all": "REPOSITORIES=JSON jest --runInBand",
+    "test:unit": "jest --watchAll --testRegex=.unit.test.ts --verbose",
+    "test:e2e": "REPOSITORIES=JSON jest --runInBand --watchAll --testRegex=.e2e.test.ts --verbose",
+    "test:integration": "jest --runInBand --testRegex=.integration.test.ts --watchAll --verbose",
+    "test:all": "REPOSITORIES=JSON jest --runInBand --verbose",
     "lint": "eslint '*/**/*.{js,ts,tsx}' --fix"
   },
   "keywords": [],
