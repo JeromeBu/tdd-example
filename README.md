@@ -31,8 +31,22 @@ End to end tests :
 npm run test:e2e
 ```
 
-**Start the app :**
+## Start the app :
+
+# To start with IN_MEMORY database, and an actual clock :
 
 ```
-npm run start
+npm start
+```
+
+# With the JSON database
+
+```
+npm run start:json
+```
+
+If you want to fake that it is the morning (time during when the app is suppose to work), you can add `NODE_ENV=test`, to use the CustomClock. For exemple :
+
+```
+NODE_ENV=test npm run start:json
 ```

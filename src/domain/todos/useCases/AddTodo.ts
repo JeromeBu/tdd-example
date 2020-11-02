@@ -22,8 +22,8 @@ export class AddTodo implements UseCase<AddTodoParams> {
 
   public async execute(params: AddTodoParams) {
     const hour = this.clock.getNow().getHours();
-    if (hour < 8 || hour >= 18)
-      throw new Error("You can only add todos between 08h00 and 18h00");
+    if (hour < 8 || hour >= 12)
+      throw new Error("You can only add todos between 08h00 and 12h00");
 
     const todo = new TodoEntity(params);
     await this.todoRepository.save(todo);

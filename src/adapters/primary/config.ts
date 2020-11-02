@@ -20,7 +20,7 @@ const getClock = (): Clock => {
 
   if (process.env.NODE_ENV === "test") {
     const clock = new CustomClock();
-    clock.setNextDate(new Date("2020-11-02T12:00"));
+    clock.setNextDate(new Date("2020-11-02T10:00"));
     return clock;
   }
   return new RealClock();

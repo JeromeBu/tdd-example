@@ -13,7 +13,7 @@ describe("Add Todo", () => {
     todoRepository = new InMemoryTodoRepository();
     clock = new CustomClock();
     addTodo = new AddTodo({ todoRepository, clock });
-    clock.setNextDate(new Date("2020-11-02T12:00"));
+    clock.setNextDate(new Date("2020-11-02T10:00"));
   });
 
   describe("Description has less than 3 charaters", () => {
@@ -69,19 +69,19 @@ describe("Add Todo", () => {
       });
       await expectPromiseToFailWith(
         useCasePromise,
-        "You can only add todos between 08h00 and 18h00"
+        "You can only add todos between 08h00 and 12h00"
       );
     });
 
-    it("refuses to add Todo after 18h00", async () => {
-      clock.setNextDate(new Date("2020-11-02T18:00"));
+    it("refuses to add Todo after 12h00", async () => {
+      clock.setNextDate(new Date("2020-11-02T12:00"));
       const useCasePromise = addTodo.execute({
         uuid: "someUuid",
         description: "a description",
       });
       await expectPromiseToFailWith(
         useCasePromise,
-        "You can only add todos between 08h00 and 18h00"
+        "You can only add todos between 08h00 and 12h00"
       );
     });
   });
