@@ -22,7 +22,7 @@ The storage will be done with an In Memory adapter.
 ## Bonus :
 
 - Add e2e tests and make the API available
-- You can add Todos only between 10h and 18h
+- You can add Todos only between 08h and 12h
 - Build a repository adapter to store in JSON file (with corresponding integration tests) instead of in memory
 
 The following commands are availables, self explanatory :

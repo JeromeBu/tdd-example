@@ -7,7 +7,7 @@ import { AddTodo } from "./AddTodo";
 // - trailing white spaces should be removed, and text should be capitalize
 // - you cannot add 2 Todos with the same uuid
 
-// - bonus : you can add Todos only between 10h and 18h
+// - bonus : you can add Todos only between 08h and 12h
 
 describe("Add Todo", () => {
   describe("Description has less than 3 charaters", () => {
