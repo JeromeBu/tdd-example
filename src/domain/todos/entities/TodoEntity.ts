@@ -10,7 +10,7 @@ export class TodoEntity {
   constructor({ uuid, description }: TodoProps) {
     const trimedDescription = description.trim();
     if (trimedDescription.length <= 3) {
-      throw new Error("Todo description should be at least 3 characters long");
+      throw new Error("Todo description should be at least 4 characters long");
     }
 
     this.uuid = uuid;

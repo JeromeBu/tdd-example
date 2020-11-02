@@ -8,7 +8,7 @@ import { expectPromiseToFailWith } from "../../utils/test.helpers";
 const readFile = util.promisify(fs.readFile);
 
 describe("JsonTodoRepository", () => {
-  const dataPath = `${__dirname}/data.json`;
+  const dataPath = `${__dirname}/data-test.json`;
   let csvTodoRepository: TodoRepository;
 
   beforeEach(() => {

@@ -27,7 +27,7 @@ describe("Todos routes", () => {
         .send({ uuid: "uuidDescriptionToShort", description: "ie" });
       expect(response.status).toBe(400);
       expect(response.body).toEqual({
-        errors: ["Todo description should be at least 3 characters long"],
+        errors: ["Todo description should be at least 4 characters long"],
       });
     });
   });

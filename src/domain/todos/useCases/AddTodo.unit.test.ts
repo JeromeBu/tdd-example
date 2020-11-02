@@ -20,7 +20,7 @@ describe("Add Todo", () => {
     it("refuses to add the Todo with an explicit warning", async () => {
       await expectPromiseToFailWith(
         addTodo.execute({ uuid: "someUuid", description: "123" }),
-        "Todo description should be at least 3 characters long"
+        "Todo description should be at least 4 characters long"
       );
     });
   });
