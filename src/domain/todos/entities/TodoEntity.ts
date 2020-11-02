@@ -8,11 +8,13 @@ export class TodoEntity {
   public readonly description: string;
 
   constructor({ uuid, description }: TodoProps) {
-    if (description.length <= 3) {
+    const trimedDescription = description.trim();
+    if (trimedDescription.length <= 3) {
       throw new Error("Todo description should be at least 3 characters long");
     }
 
     this.uuid = uuid;
-    this.description = description;
+    this.description =
+      trimedDescription[0].toUpperCase() + trimedDescription.slice(1);
   }
 }

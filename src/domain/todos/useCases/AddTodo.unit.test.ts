@@ -37,11 +37,22 @@ describe("Add Todo", () => {
   });
 
   describe("Description is fine", () => {
-    it("saves the todo", async () => {
+    it("saves the Todo", async () => {
       const uuid = generateUuid();
       const description = "My description";
       await addTodo.execute({ uuid, description });
       expect(todoRepository.todos).toEqual([{ uuid, description }]);
+    });
+  });
+
+  describe("Description has trailing white space", () => {
+    it("removes the white spaces and capitalize before saving the Todo", async () => {
+      const uuid = "myUuid";
+      const description = "   should Be trimed  ";
+      await addTodo.execute({ uuid, description });
+      expect(todoRepository.todos).toEqual([
+        { uuid, description: "Should Be trimed" },
+      ]);
     });
   });
 });
