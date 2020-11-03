@@ -1,4 +1,4 @@
-import { AddTodo } from "./AddTodo";
+import { addTodo } from "./AddTodo";
 // import { v4 as generateUuid } from "uuid";
 
 // Add Todo :
@@ -11,7 +11,9 @@ import { AddTodo } from "./AddTodo";
 
 describe("Add Todo", () => {
   describe("Description has less than 3 charaters", () => {
-    it("refuses to add the Todo with an explicit warning", async () => {});
+    it("refuses to add the Todo with an explicit warning", async () => {
+      addTodo("");
+    });
   });
 
   const expectPromiseToFailWith = async (
