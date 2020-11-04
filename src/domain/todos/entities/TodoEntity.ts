@@ -2,4 +2,6 @@
 
 // export class TodoEntity {}
 
-type TodoEntity = {};
+export type TodoEntity = {
+  description: string;
+};
