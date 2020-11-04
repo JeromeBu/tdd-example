@@ -7,5 +7,6 @@ describe("Hello world route", () => {
   it("says hello", async () => {
     const response = await request.get("/");
     expect(response.body).toEqual({ message: "Hello World !" });
+    expect(response.status).toBe(200);
   });
 });

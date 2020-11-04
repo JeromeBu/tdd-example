@@ -1,3 +1,5 @@
-type TodoProps = {};
+// type TodoProps = {};
 
-export class TodoEntity {}
+// export class TodoEntity {}
+
+type TodoEntity = {};

@@ -1,3 +1,10 @@
+You need node to run the project.
+To install all the dependencies :
+
+```
+npm install
+```
+
 Focus will not be to do very algorithmic TDD but rather how to use it on a real application.
 We will build a very classical Todo list app.
 
