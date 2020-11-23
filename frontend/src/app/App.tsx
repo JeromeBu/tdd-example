@@ -1,26 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { TodoComponent } from "../components/TodoComponent";
+import { actions } from "../core-logic/store/rootAction";
+import type { RootState } from "../core-logic/store/rootReducer";
+import { v4 as uuidV4 } from "uuid";
+import "./App.css";
 
-function App() {
+export const App = () => {
+  const todos = useSelector((state: RootState) => state.todos.items);
+  const dispatch = useDispatch();
+  const [description, setDescription] = useState("");
+
+  const addTodo = () => {
+    dispatch(actions.createTodoThunk({ uuid: uuidV4(), description }));
+    setDescription("");
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      My todo app
+      <div>
+        {todos.map((todo) => (
+          <TodoComponent key={todo.uuid} {...todo} />
+        ))}
+      </div>
+      <div>
+        <input
+          onKeyDown={(e) => e.key === "Enter" && addTodo()}
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+        <button onClick={addTodo}>Add Todo</button>
+      </div>
     </div>
   );
-}
-
-export default App;
+};
